@@ -100,6 +100,7 @@
 .candidate-biography p{line-height:1.65}
 @media(max-width:600px){.driver{grid-template-columns:1fr;gap:10px}.result-panel .result-label{font-size:18px}}
 
+.entry-options,.edit-options{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}.entry-options .gov-button{margin:0;font-size:17px;padding:10px 14px}.intro-note{margin:0 0 25px}.main-column .lead{margin-bottom:20px}#personalNote{margin:0 0 22px;max-width:600px}.edit-options button,.seat-link{font:inherit;color:var(--blue);border:0;background:transparent;text-decoration:underline;cursor:pointer;text-align:left;min-height:44px;padding:6px 0}.edit-options button{padding:8px 12px;border:1px solid var(--border)}.method-link{font:inherit;background:none;border:0;color:white;text-decoration:underline;padding:14px 0 0;cursor:pointer}.model-note summary{font-size:22px;font-weight:bold;cursor:pointer}.model-note p{margin:15px 0}.model-note li{margin:12px 0}.model-note{scroll-margin-top:24px}button:focus-visible,summary:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}.leaderboard-chance .leaderboard-area{white-space:normal;font-size:14px}@media(max-width:480px){.entry-options{display:grid}.edit-options{display:grid;grid-template-columns:1fr 1fr}.leaderboard td,.leaderboard th{overflow-wrap:anywhere}.leaderboard-chance{width:30%}}
 </style>
   </head>
   <body>
@@ -116,12 +117,12 @@
         <section class="main-column">
           <form id="campaignForm" autocomplete="off">
             <section class="step-panel active" data-panel="0">
-              <h1>Create your candidate</h1><p class="lead">Start with the information that sits behind every campaign.</p><button class="gov-button secondary existing-figure-button" id="existingCandidate" type="button" aria-expanded="false" aria-controls="figureChooser">Existing political figure</button><div class="inline-figure-chooser hidden" id="figureChooser"><label class="gov-label" for="famousFigure">Choose a political figure</label><select class="gov-select" id="famousFigure"><option value="">Choose a name</option></select></div>
-              <div class="inset-text"><p>Create a candidate, choose their background and political outlook, then pick a constituency. Discover their election chances and where else they could do well.</p></div>
+              <h1>Create your candidate</h1><p class="lead">Build a campaign, explore its election prospects and find promising constituencies.</p><div class="entry-options"><button class="gov-button secondary" id="customCandidate" type="button">Create a candidate</button><button class="gov-button secondary existing-figure-button" id="existingCandidate" type="button" aria-expanded="false" aria-controls="figureChooser">Try a political figure</button></div><div class="inline-figure-chooser hidden" id="figureChooser"><label class="gov-label" for="famousFigure">Choose a political figure</label><select class="gov-select" id="famousFigure"><option value="">Choose a name</option></select></div>
+              <p class="hint intro-note">An illustrative simulation using historical elections, not a forecast of the next election.</p>
               <label class="gov-label" for="candidateName">Candidate name</label><input class="gov-input" id="candidateName" type="text" placeholder="Michael Tremeer" maxlength="42" required />
-              <div class="birth-year"><div><label class="gov-label" for="birthYear">Year of birth</label><p class="hint">Selected year: <b id="birthYearValue">1975</b></p></div><input id="birthYear" type="range" min="1850" max="2008" value="1975" step="1" aria-describedby="birthYearValue" /></div>
-              <div class="field-row"><div><label class="gov-label" for="gender">Gender</label><select class="gov-select" id="gender"><option value="Man" selected>Man</option><option>Woman</option><option>Non-binary</option><option>Prefer not to say</option></select></div><div><label class="gov-label" for="ethnicity">Ethnic background</label><select class="gov-select" id="ethnicity"><option selected>White British</option><option>Asian British</option><option>Black British</option><option>Black other</option><option>Mixed heritage</option><option>White other</option><option>Other background</option></select></div></div>
-              <div class="field-row"><div><label class="gov-label" for="religion">Faith or worldview</label><select class="gov-select" id="religion"><option selected>No religion</option><option>Christian</option><option>Muslim</option><option>Hindu</option><option>Jewish</option><option>Sikh</option><option>Buddhist</option><option>Other faith</option><option>Not specified / private</option></select></div><div><label class="gov-label" for="birthplace">County they were born in</label><select class="gov-select" id="birthplace" required></select></div></div>
+              <p class="field-hint" id="personalNote">Age, gender, ethnicity, faith and birthplace are optional biographical details. They do not affect the score. Upbringing, education, career and political outlook contribute small gameplay adjustments.</p><div class="birth-year"><div><label class="gov-label" for="birthYear">Year of birth</label><p class="hint">Selected year: <b id="birthYearValue">1975</b></p></div><input id="birthYear" type="range" min="1850" max="2008" value="1975" step="1" aria-describedby="birthYearValue" /></div>
+              <div class="field-row"><div><label class="gov-label" for="gender">Gender</label><select class="gov-select" id="gender"><option value="Man">Man</option><option>Woman</option><option>Non-binary</option><option selected>Prefer not to say</option></select></div><div><label class="gov-label" for="ethnicity">Ethnic background</label><select class="gov-select" id="ethnicity" aria-describedby="personalNote"><option selected>Not specified</option><option>White British</option><option>Asian British</option><option>Black British</option><option>Black other</option><option>Mixed heritage</option><option>White other</option><option>Other background</option></select></div></div>
+              <div class="field-row"><div><label class="gov-label" for="religion">Faith or worldview</label><select class="gov-select" id="religion"><option>No religion</option><option>Christian</option><option>Muslim</option><option>Hindu</option><option>Jewish</option><option>Sikh</option><option>Buddhist</option><option>Other faith</option><option selected>Not specified / private</option></select></div><div><label class="gov-label" for="birthplace">County they were born in</label><select class="gov-select" id="birthplace"></select></div></div>
             </section>
             <section class="step-panel" data-panel="1">
               <h1>Build their background</h1><p class="lead">The things a voter might recognise from their own life.</p>
@@ -130,14 +131,14 @@
               <div class="important"><h2>Why this matters</h2><p>Education opens some career paths. Choose the background that fits your candidate.</p></div>
             </section>
             <section class="step-panel" data-panel="2"><h1>Choose their politics</h1><p class="lead">Choose a party, then the outlook your candidate brings to it.</p><fieldset><legend class="gov-label">Party they are running with</legend><section class="party-group"><h2>England / Britain-wide</h2><div class="party-select"><label><input type="radio" name="party" value="Labour" checked><span>Labour <small>403 MPs</small></span></label><label><input type="radio" name="party" value="Conservative"><span>Conservative <small>118 MPs</small></span></label><label><input type="radio" name="party" value="Liberal Democrat"><span>Liberal Democrat <small>71 MPs</small></span></label><label><input type="radio" name="party" value="Reform UK"><span>Reform UK <small>8 MPs</small></span></label><label><input type="radio" name="party" value="Green"><span>Green <small>5 MPs</small></span></label><label><input type="radio" name="party" value="Your Party"><span>Your Party <small>2 MPs</small></span></label><label><input type="radio" name="party" value="Restore Britain"><span>Restore Britain <small>1 MP</small></span></label></div></section><section class="party-group"><h2>Scotland</h2><div class="party-select"><label><input type="radio" name="party" value="SNP"><span>SNP <small>8 MPs</small></span></label></div></section><section class="party-group"><h2>Wales</h2><div class="party-select"><label><input type="radio" name="party" value="Plaid Cymru"><span>Plaid Cymru <small>4 MPs</small></span></label></div></section><section class="party-group"><h2>Northern Ireland</h2><div class="party-select"><label><input type="radio" name="party" value="Sinn Féin"><span>Sinn Féin <small>7 MPs</small></span></label><label><input type="radio" name="party" value="DUP"><span>DUP <small>5 MPs</small></span></label><label><input type="radio" name="party" value="SDLP"><span>SDLP <small>2 MPs</small></span></label><label><input type="radio" name="party" value="Alliance"><span>Alliance <small>1 MP</small></span></label><label><input type="radio" name="party" value="TUV"><span>TUV <small>1 MP</small></span></label><label><input type="radio" name="party" value="UUP"><span>UUP <small>1 MP</small></span></label><label><input type="radio" name="party" value="Green Party NI"><span>Green Party NI <small>0 MPs</small></span></label><label><input type="radio" name="party" value="People Before Profit"><span>People Before Profit <small>0 MPs</small></span></label></div></section><div class="party-select independent-choice"><label><input type="radio" name="party" value="Independent"><span>Independent</span></label></div><p class="hint">Independent candidates can choose any political profile and stand anywhere in the UK.</p><p class="hint party-source">MP totals checked 12 September 2026. Ordered within each group. <a href="https://members.parliament.uk/parties/Commons" target="_blank" rel="noopener">Source: UK Parliament</a>.</p></fieldset><fieldset class="candidate-profiles"><legend class="gov-label" id="candidateProfileTitle">Choose a candidate profile</legend><p class="hint">Pick the outlook that best describes your candidate.</p><div id="candidateProfileOptions"></div></fieldset></section>
-<section class="step-panel" data-panel="3"><h1>Choose a constituency</h1><p class="lead">Choose a nation or English region on the map, then select the constituency inside it.</p><div class="map-picker"><div class="map-heading"><div><span class="caption" id="mapStep">Choose an area</span><h2 id="mapTitle" tabindex="-1">United Kingdom</h2></div><button class="gov-button secondary hidden" id="mapBack" type="button">Back to UK map</button></div><p class="hint" id="mapHint">Select a nation or English region to zoom in.</p><div class="map-canvas"><svg id="constituencyMap" viewBox="0 0 700 620" role="group" aria-labelledby="mapTitle" aria-describedby="mapHint"></svg><p class="sr-only" id="mapLive" aria-live="polite"></p></div><select id="regionFilter" hidden aria-hidden="true"></select><select id="seatList" hidden aria-hidden="true"></select><p class="hint" id="partyRestriction"></p></div><div class="selected-summary seat-result" id="selectedSeat"></div></section>
+<section class="step-panel" data-panel="3"><h1>Choose a constituency</h1><p class="lead">Search by constituency name, or explore the map below.</p><label class="gov-label" for="seatSearchChoice">Find a constituency</label><select id="seatSearchChoice"><option value="">Choose a constituency</option></select><div class="map-picker"><div class="map-heading"><div><span class="caption" id="mapStep">Choose an area</span><h2 id="mapTitle" tabindex="-1">United Kingdom</h2></div><button class="gov-button secondary hidden" id="mapBack" type="button">Back to UK map</button></div><p class="hint" id="mapHint">Select a nation or English region to zoom in.</p><div class="map-canvas"><svg id="constituencyMap" viewBox="0 0 700 620" role="group" aria-labelledby="mapTitle" aria-describedby="mapHint"></svg><p class="sr-only" id="mapLive" aria-live="polite"></p></div><select id="regionFilter" hidden aria-hidden="true"></select><select id="seatList" hidden aria-hidden="true"></select><p class="hint" id="partyRestriction"></p></div><div class="selected-summary seat-result" id="selectedSeat"></div></section>
           </form>
           <div class="actions"><button class="gov-button secondary" id="backButton" type="button">Back</button><button class="gov-button" id="nextButton" type="button">Continue</button></div>
         </section>
         <aside class="side-column"><h2>About this simulator</h2><p>Explore a candidate campaign using historical election results.</p><p>Compare constituencies and explore how different candidate profiles could perform.</p></aside>
       </div>
     </main>
-    <main class="container result-view hidden" id="resultView"><a href="#" class="back-link" id="editCampaign">Change campaign details</a><div class="result-header"><span class="caption">Snap election scenario</span><h1 id="resultTitle">David Clarke in Bolton North East</h1><p id="resultSubhead">Labour candidate</p></div><section class="result-panel"><p class="caption">Modelled chance of winning</p><div class="percentage"><span id="winScore">58</span><b>%</b></div><strong class="result-label" id="winLabel">Likely win</strong><p class="result-copy" id="scoreCopy"></p></section><section class="candidate-biography"><h2>Your candidate</h2><p id="candidateBiography"></p></section><section class="result-details"><h2>Campaign readout</h2><div id="driversList" class="drivers-list"></div></section><section class="leaderboard" aria-labelledby="leaderboardTitle"><h2 id="leaderboardTitle">Your top 5 constituencies</h2><p id="leaderboardNote"></p><table><caption class="sr-only">Five strongest constituencies for this candidate</caption><thead><tr><th scope="col">Rank</th><th scope="col">Constituency</th><th scope="col" class="leaderboard-chance">Win chance</th></tr></thead><tbody id="leaderboardRows"></tbody></table></section><section class="model-note"><h2>About this result</h2><p>Estimated election prospects based on historical results and your selected candidate profile.</p></section><button class="gov-button" id="startAgain" type="button">Create another candidate</button></main>
+    <main class="container result-view hidden" id="resultView"><a href="#" class="back-link" id="editCampaign">Change campaign details</a><div class="result-header"><span class="caption">Snap election scenario</span><h1 id="resultTitle">David Clarke in Bolton North East</h1><p id="resultSubhead">Labour candidate</p></div><section class="result-panel"><p class="caption">Modelled chance of winning</p><div class="percentage"><span id="winScore">58</span><b>%</b></div><strong class="result-label" id="winLabel">Likely win</strong><p class="result-copy" id="scoreCopy"></p><p class="result-copy">Illustrative model, not an election forecast.</p><button type="button" class="method-link" id="explainResult">How this is calculated</button></section><nav class="edit-options" aria-label="Edit campaign"><button type="button" data-edit="0">Edit candidate</button><button type="button" data-edit="1">Edit background</button><button type="button" data-edit="2">Edit politics</button><button type="button" data-edit="3">Change constituency</button></nav><section id="runComparison" class="model-note hidden" aria-live="polite"></section><section class="candidate-biography"><h2>Your candidate</h2><p id="candidateBiography"></p></section><section class="result-details"><h2>Campaign readout</h2><div id="driversList" class="drivers-list"></div></section><section class="leaderboard" aria-labelledby="leaderboardTitle"><h2 id="leaderboardTitle">Your top 5 constituencies</h2><p id="leaderboardNote"></p><table><caption class="sr-only">Five strongest constituencies for this candidate</caption><thead><tr><th scope="col">Rank</th><th scope="col">Constituency</th><th scope="col" class="leaderboard-chance">Win chance</th></tr></thead><tbody id="leaderboardRows"></tbody></table></section><details class="model-note" id="methodology"><summary>How this is calculated</summary><p>This is a gameplay model with fixed design assumptions, not a calibrated forecast. It does not use live opinion polls.</p><ol><li>The starting vote shares blend 2024 constituency results (80%), 2019 notional results on the same boundaries (17%) and 2017 country-level results (3%). Missing historical data falls back to the latest local distribution. Scenario affiliation transfers are applied to the 2024 baseline; the historical result panel stays unchanged.</li><li>Candidate adjustments combine political outlook (up to ±2 points), career (up to ±0.75), university (0 to +0.35) and shared upbringing region or nation (+0.75). Their sum is limited to −4 to +3 points before vote shares are normalised. These are game rules, not measured effects on voters.</li><li>The estimated lead over the strongest rival is converted to a probability using a normal distribution with an assumed uncertainty scale of 11.5–15.5 percentage points. Displayed probabilities are rounded and capped at 1–99%.</li><li>Independent candidates use the party associated with their chosen outlook as a reference, then receive 80% of that reference probability. This is a gameplay rule; their displayed margin describes the reference contest.</li></ol><p id="raceExplanation"></p><p>Historical data: House of Commons Library election results and Parliament notional results, as embedded in this file. Local political outlook is inferred from party support, not a voter survey. No validation against held-out elections is supplied with this model.</p></details><details class="model-note"><summary>Share this result</summary><p>Copy this summary to share your scenario. It includes the candidate name and result.</p><textarea class="gov-input" id="shareSummary" aria-label="Result summary to copy" readonly style="height:150px;max-width:100%"></textarea></details><button class="gov-button" id="startAgain" type="button">Create another candidate</button></main>
     <footer class="gov-footer"><div class="container">Created by Jaiden Pinchess</div></footer>
       <script data-bundled-from="standalone-data">
 // Reference data for 650 constituencies. Candidate-level 2024 vote shares are aggregated from the House of Commons Library
@@ -785,6 +786,7 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
     resetSearches();
     scotlandArea = "";
     els.region.value = ""; els.seat.value = "";
+    $("seatSearchChoice").value="";choiceInputs.seatSearchChoice?.refresh();
     populateSeats(); renderConstituencyMap(); clearValidation();
   }
 
@@ -1008,7 +1010,7 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
     title.textContent = detailed ? name : mapName(feature.properties.r);
     path.append(title);
     const showName = () => { els.mapHint.textContent = detailed ? name : mapName(feature.properties.r); };
-    const hideName = () => { els.mapHint.textContent = detailed ? "Hover over a constituency to see its name. Select it to continue." : feature.properties.scottish ? "Select a Scottish area to see its constituencies." : "Select a nation or English region to zoom in."; };
+    const hideName = () => { els.mapHint.textContent = detailed ? "Tap a constituency to select it, or use the search above. Keyboard users can focus a seat and press Enter." : feature.properties.scottish ? "Select a Scottish area to see its constituencies." : "Select a nation or English region to zoom in."; };
     path.addEventListener("pointerenter", showName);
     path.addEventListener("pointerleave", hideName);
     path.addEventListener("focus", showName);
@@ -1058,7 +1060,7 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
     (scottishOverview ? scottishFeatures : region ? features : regionFeatures).forEach((feature) => appendMapPath(feature, project, Boolean(region) && !scottishOverview));
     els.mapStep.textContent = region && !scottishOverview ? "Choose a constituency" : "Choose an area";
     els.mapTitle.textContent = scotlandArea || (region ? mapName(region) : "United Kingdom");
-    els.mapHint.textContent = scottishOverview ? 'Choose a Scottish area to zoom in.' : region ? "Hover over a constituency to see its name. Select it to continue." : "Select a nation or English region to zoom in.";
+    els.mapHint.textContent = scottishOverview ? 'Choose a Scottish area to zoom in.' : region ? "Tap a constituency to select it, or use the search above. Keyboard users can focus a seat and press Enter." : "Select a nation or English region to zoom in.";
     els.mapBack.classList.toggle("hidden", !region);
     els.mapBack.textContent = scotlandArea ? 'Back to Scotland' : 'Back to UK map';
   }
@@ -1085,6 +1087,7 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
     renderConstituencyMap();
     // Re-rendering replaces the focused SVG node. Keep keyboard users on their selection.
     [...els.map.children].find(node=>node.getAttribute('aria-label')===`Select ${name}`)?.focus();
+    $("seatSearchChoice").value=name; choiceInputs.seatSearchChoice?.refresh();
     els.mapLive.textContent = `${name} selected.`;
   }
 
@@ -1123,6 +1126,7 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
 
   function setStep(nextStep) {
     step = Math.max(0, Math.min(3, nextStep));
+    $("topBack").classList.toggle("hidden",step===0);
     const headings = ["Candidate details", "Background", "Campaign profile", "Constituency"];
     els.panels.forEach((panel, index) => panel.classList.toggle("active", index === step));
     els.phaseNumber.textContent = `Step ${step + 1} of 4`;
@@ -1143,6 +1147,7 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
 
   function validateStep() {
     // Commit an exact typed match synchronously before checking required values.
+    if(step===3)choiceInputs.seatSearchChoice?.settle();
     if(step===0)choiceInputs.birthplace?.settle();
     if(step===1){choiceInputs.hometown?.settle();if(hasUniversity())choiceInputs.university?.settle();choiceInputs.career?.settle();}
     if (step === 2 && !document.querySelector('input[name="candidateProfile"]:checked')) {
@@ -1152,7 +1157,7 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
       return false;
     }
     if (step === 3 && !els.seat.value) {
-      els.error.textContent = "Select a constituency on the map before continuing.";
+      els.error.textContent = "Search for a constituency or select one on the map before continuing.";
       els.error.classList.remove("hidden");
       return false;
     }
@@ -1181,7 +1186,7 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
     const role=/^NHS\b/.test(careerLabel)?careerLabel:careerLabel.charAt(0).toLowerCase()+careerLabel.slice(1);
     const work=career?.id==='unemployed'?'looked for work':career?.id==='carer'?'became an unpaid family carer':`worked as ${/^NHS/.test(role)||/^[aeiou]/i.test(role)&&!/^un/i.test(role)?'an':'a'} ${role}`;
     const born=$('birthplace').value,home=$('hometown').value;
-    const origins=born===home?`${name} was born and raised in ${born}.`:`${name} was born in ${born} and grew up in ${home}.`;
+    const origins=!born?`${name} grew up in ${home}.`:born===home?`${name} was born and raised in ${born}.`:`${name} was born in ${born} and grew up in ${home}.`;
     const university=els.university.value;
     const pronoun=$('gender').value==='Man'?'he':$('gender').value==='Woman'?'she':'they';
     const subject=pronoun.charAt(0).toUpperCase()+pronoun.slice(1);
@@ -1244,6 +1249,9 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
       row.append(value, copy);
       els.drivers.append(row);
     });
+    $('raceExplanation').textContent = `This run: ${race.margin.toFixed(1)} percentage-point modelled margin against ${race.rival}, with an uncertainty scale of ${race.volatility.toFixed(1)} points. These assumptions do not guarantee the outcome.`;
+    $("shareSummary").value=`${name} — ${party}, ${seat.n}: ${total}% illustrative win chance. ${outlook} outlook. Modelled margin: ${race.margin.toFixed(1)} percentage points${party==='Independent'?' (reference party contest)':''}. A gameplay simulation using historical elections, not a forecast. Try it at https://electionsimulator.uk/`;
+    compareRun({title:`${name} in ${seat.n}`,total, fields:campaignSnapshot()});
     renderLeaderboard(party);
     els.journey.classList.add("hidden");
     els.result.classList.remove("hidden");
@@ -1261,17 +1269,54 @@ const constituencyBoundaries = {"type":"FeatureCollection","features":[{"type":"
   }
 
   function renderLeaderboard(party) {
-    $("leaderboardNote").textContent = `The five strongest constituencies for this ${party} candidate, using the same calculation and all your choices. Only places where the party can stand are included.`;
+    $("leaderboardNote").textContent = `The five strongest constituencies for this ${party} candidate, ranked by unrounded model probability, then margin, then name. Displayed percentages can tie because of rounding and the cap. Margins are percentage points against the strongest rival (the reference party’s contest for independents). Select a seat to compare it. Only eligible seats are included.`;
     const rows = $("leaderboardRows");
     rows.replaceChildren();
     strongestConstituencies(party).forEach((entry, index) => {
       const row = document.createElement("tr");
-      row.innerHTML = `<td>${index + 1}</td><th scope="row">${escapeHtml(entry.seat.n)}<span class="leaderboard-area">${escapeHtml(mapName(entry.seat.r))}</span></th><td class="leaderboard-chance">${entry.total}%</td>`;
+      row.innerHTML = `<td>${index + 1}</td><th scope="row"><button type="button" class="seat-link">${escapeHtml(entry.seat.n)}</button><span class="leaderboard-area">${escapeHtml(mapName(entry.seat.r))}</span></th><td class="leaderboard-chance">${entry.total}%<span class="leaderboard-area">${entry.margin >= 0 ? "+" : ""}${entry.margin.toFixed(1)} pp margin</span></td>`;
+      row.querySelector("button").addEventListener("click",()=>{ chooseSeat(entry.seat.n); renderResult(); });
       rows.append(row);
     });
   }
 
+  let previousRun=null;
+  function campaignSnapshot(){
+    const fields={};
+    els.form.querySelectorAll('input,select').forEach(input=>{
+      if(!input.id || input.id.endsWith('Search') || input.id==='seatSearchChoice' || input.id==='regionFilter' || input.id==='famousFigure')return;
+      fields[input.id]=input.type==='checkbox'?String(input.checked):input.value;
+    });
+    fields.party=selectedRadio('party');fields.outlook=selectedRadio('candidateProfile');
+    return fields;
+  }
+  function compareRun(current){
+    const panel=$('runComparison');panel.replaceChildren();
+    panel.classList.toggle('hidden',!previousRun);
+    if(previousRun){
+      const heading=document.createElement('h2');heading.textContent='Compared with your previous run';
+      const copy=document.createElement('p');const delta=current.total-previousRun.total;
+      copy.textContent=`${previousRun.title}: ${previousRun.total}%. This run: ${current.total}% (${delta>0?'+':''}${delta} percentage points).`;
+      const changes=document.createElement('p');
+      const labels={candidateName:'Name',birthYear:'Birth year',gender:'Gender',ethnicity:'Ethnicity',religion:'Faith',birthplace:'Birthplace',hometown:'Upbringing',post16:'Education path',wentToUniversity:'University attendance',university:'University',career:'Career',seatList:'Constituency',party:'Party',outlook:'Political outlook'};
+      const changed=Object.keys(current.fields).filter(key=>current.fields[key]!==previousRun.fields[key]);
+      changes.textContent=changed.length?'Changed: '+changed.map(key=>labels[key]||key).join(', ')+'.':'No campaign inputs changed.';
+      panel.append(heading,copy,changes);
+    }
+    previousRun=current;
+  }
+  function chooseSeat(name){
+    const seat=seats.find(item=>item.n===name);if(!seat)return;
+    scotlandArea='';els.region.value=seat.r;populateSeats();selectMapSeat(name);
+    choiceInputs.seatSearchChoice.close();
+  }
   function initialise() {
+    populateSelect($('seatSearchChoice'),seats.map(seat=>seat.n).sort((a,b)=>a.localeCompare(b,'en-GB')),'Choose a constituency');
+    choiceInputs.seatSearchChoice=enhanceChoice($('seatSearchChoice'),'constituencies');
+    $('seatSearchChoice').addEventListener('change',()=>{const name=$('seatSearchChoice').value;if(name)chooseSeat(name);});
+    $('customCandidate').addEventListener('click',()=>beginCandidate(''));
+    $('explainResult').addEventListener('click',()=>{const note=$('methodology');note.open=true;note.scrollIntoView({behavior:'smooth'});note.querySelector('summary').focus();});
+    document.querySelectorAll('[data-edit]').forEach(button=>button.addEventListener('click',()=>{els.result.classList.add('hidden');els.journey.classList.remove('hidden');setStep(Number(button.dataset.edit));}));
     // Validation belongs to the active step, not hidden required fields on other pages.
     els.form.noValidate = true;
     els.form.addEventListener('submit',event=>event.preventDefault());
